@@ -6,10 +6,21 @@ module.exports = {
   lang: "zh-cn",
 
   // 插件列表
-  plugins: ["-lunr", "-search", "search-pro2","code"],
+  plugins: [
+    "-lunr",
+    "-search",
+    "search-pro2",
+    "code",
+    "expandable-chapters",
+    "hide-element",
+  ],
 
   // 插件全局配置
-  pluginsConfig: {},
+  pluginsConfig: {
+    "hide-element": {
+      elements: [".gitbook-link"],
+    },
+  },
 
   // 模板变量
   variables: {

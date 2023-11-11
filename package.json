@@ -12,6 +12,7 @@
   "dependencies": {
     "gitbook-plugin-code": "^0.1.0",
     "gitbook-plugin-expandable-chapters": "^0.2.0",
+    "gitbook-plugin-hide-element": "0.0.4",
     "gitbook-plugin-search-pro2": "^1.0.2",
     "pnpm": "^8.10.2"
   }

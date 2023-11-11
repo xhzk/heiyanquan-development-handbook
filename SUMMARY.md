@@ -1,6 +1,6 @@
 # SUMMARY
 
-* [Introduction](README.md)
+- [Introduction](README.md)
 
 # 概要
 
