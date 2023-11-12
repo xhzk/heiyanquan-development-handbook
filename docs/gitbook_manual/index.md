@@ -1,30 +1,50 @@
-API命名规范
+# GItBook 
 
-| 操作 | 前缀   | 事例        |
-| ---- | ------ | ----------- |
-| 获取 | get    | get{XXX}    |
-| 新增 | add    | add{XXX}    |
-| 修改 | update | update{XXX} |
-| 删除 | delete | delete{XXX} |
-| 上传 | upload | upload{XXX} |
-| 发送 | send   | send{XXX}   |
 
-路由命名规范
 
-## 请求方式
+GitBook 是什么？其实用一句话就可以概括，它是一个 **能将使用 Markown 语法的 md 格式文档，快速制作成各种格式电子书的工具**。
 
-| 请求方式 | 描述     |
-| :------- | :------- |
-| GET      | 获取数据 |
-| POST     | 新增数据 |
-| PUT      | 更新数据 |
-| DELETE   | 删除数据 |
+常被用于编写文档或者电子书，特点是方便简洁，易于使用。只要熟悉轻量级标记语法的 Markdown 语法，就能使用 GitBook 来制作各种格式的电子书。
 
-## 返回参数
+GitBook 有网页版和本地版两种，网页版通过 [https://www.gitbook.com](https://www.gitbook.com/) 网址进行访问，本地版主要是基于 Node.js 环境进行开发。
 
-| 参数     | 类型   | 说明     | 备注                              |
-| :------- | :----- | :------- | :-------------------------------- |
-| code     | Number | 结果码   | 成功=1失败=-1未登录=401无权限=403 |
-| showMsg  | String | 显示信息 | 系统繁忙，稍后重试                |
-| errorMsg | String | 错误信息 | 便于研发定位问题                  |
-| data     | Object | 数据     | JSON 格式                         |
+> [!NOTE]
+> 目前虽然 GitBook 的代码无人维护，但是好在代码是开源的，可以根据自己需求来更改。
+
+网页版没玩明白，下面主要讲解Windows本地部署
+
+
+
+## 1.配置Node.js
+
+由于目前Gitbook项目已经停止维护，Node版本过高存在不兼容问题，所以需要使用老版本的Node，但是卸载重新安装进行版本切换过于麻烦，所以使用Node的版本控制工具gnvm，安装8.11.1（自己测试的，按照官网上的差不多10.x一下就可以）
+
+```
+# 安装node@8.11.1
+gnvm install 8.11.1
+
+# 切换版本
+gnvm use 8.11.1
+
+# 查看node版本
+node -v
+```
+
+
+
+## 2.安装GitBook
+
+在cmd终端输入以下命令即可
+> [!TIP|style:flat]
+>
+> 1.以管理员身份启动cmd
+>
+> 2.`-V`是大写的`V`
+
+```
+# 全局安装gitbook-cli
+npm install gitbook-cli -g
+
+# 查看gitbook版本
+gitbook -V
+```

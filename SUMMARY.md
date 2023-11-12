@@ -1,8 +1,9 @@
 # SUMMARY
 
-- [Introduction](README.md)
+- [关于本书](README.md)
 
-# 概要
+# 目录
 
-- [第一章](docs/gitbook_manual/index.md)
-  - [1.1 第一节](docs/gitbook_manual/环境配置/text.md)
+- [Gitbook](docs/gitbook_manual/index.md)
+  - [1.1](docs/gitbook_manual/install.md)
+- [Node 版本控制](docs/nodeversion_control/gnvm_use.md)
