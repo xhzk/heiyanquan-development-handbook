@@ -16,8 +16,13 @@
 
 # 项目组成员笔记
 
+# 卢向上
+
 - [up 的 b0ok](docs/up_b0ok/experience/node.js_installation_tutorial.md)
   - [日常经验](docs/gitbook_manual/install.md)
     - [node.js 下载](docs/up_b0ok/experience/node.js_installation_tutorial.md)
   - [算法练习](docs/gitbook_manual/install.md)
--[yc的bOok](docs/yc_bOok/Code-Generators/mybatis-plus.md)
+
+# 袁鹏
+
+- [yc 的 bOok](docs/yc_bOok/Code-Generators/mybatis-plus.md)
