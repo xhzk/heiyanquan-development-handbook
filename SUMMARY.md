@@ -18,7 +18,7 @@
 
 # 卢向上
 
-- [up 的 b0ok](docs/up_b0ok/experience/node.js_installation_tutorial.md)
+- [up 的 b0ok](docs/up_b0ok/index.md)
   - [日常经验](docs/gitbook_manual/install.md)
     - [node.js 下载](docs/up_b0ok/experience/node.js_installation_tutorial.md)
   - [算法练习](docs/gitbook_manual/install.md)
