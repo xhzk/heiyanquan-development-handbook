@@ -32,9 +32,9 @@
  */
 
 .treeview__container {
-	position: relative;
-	margin-bottom: 5px;
-	padding-bottom: 5px;
+    position: relative;
+    margin-bottom: 5px;
+    padding-bottom: 10px;
 }
 
 .treeview__container-title {
