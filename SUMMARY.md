@@ -7,11 +7,12 @@
 - [Gitbook](docs/gitbook_manual/index.md)
   - [安装](docs/gitbook_manual/install.md)
 - [Node 版本控制](docs/nodeversion_control/gnvm_use.md)
+- [Git](docs/github/index.md)
 
 # 项目
 
 - [项目文件](docs/Project_manuals/index.md)
-  - [信工签到](docs/Project_manuals/xingongqingjia/index.md)
+  - [正卷卷](docs/Project_manuals/xingongqingjia/index.md)
     - [设计手册](docs/Project_manuals/xingongqingjia/design_manual.md)
 
 # 项目组成员笔记
