@@ -8,6 +8,7 @@
   - [安装](docs/gitbook_manual/install.md)
 - [Node 版本控制](docs/nodeversion_control/gnvm_use.md)
 - [Git](docs/github/index.md)
+- [Learning website](docs/study-web/index.md)
 
 # 项目
 
