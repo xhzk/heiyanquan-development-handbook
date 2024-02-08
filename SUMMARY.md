@@ -6,9 +6,11 @@
 
 - [Gitbook](docs/gitbook_manual/index.md)
   - [安装](docs/gitbook_manual/install.md)
+  - [插件](docs/gitbook_manual/plugins.md)
 - [Node 版本控制](docs/nodeversion_control/gnvm_use.md)
 - [Git](docs/github/index.md)
 - [Learning website](docs/study-web/index.md)
+- [前端](docs/vue/index.md)
 
 # 项目
 
