@@ -742,7 +742,7 @@ export default defineConfig({
 
 ### 6.Tailwind CSS IntelliSense
 
-![tailwind](.\static\tailwind.png)
+![](.\static\tailwind.png)
 
 ### 7.PostCSS Language Support
 
