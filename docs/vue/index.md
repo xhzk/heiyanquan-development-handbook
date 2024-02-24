@@ -163,63 +163,95 @@ pnpm install -D eslint-plugin-prettier prettier eslint-config-prettier
 #### 1.安装
 
 ```
-pnpm add sass sass-loader stylelint postcss postcss-scss postcss-html stylelint-config-recess-order stylelint-config-recommended-scss stylelint-config-standard stylelint-config-standard-vue stylelint-scss stylelint-order stylelint-config-standard-scss -D
+pnpm add sass sass-loader stylelint stylelint-config-html stylelint-config-recess-order stylelint-config-recommended-scss stylelint-config-recommended-vue stylelint-config-standard stylelint-config-standard-scss stylelint-order stylelint-prettier stylelint-scss -D
 ```
 
 #### 2.配置stylrlint
 
-在项目根目录下新建 `.stylelintrc.js`文件
+在项目根目录下新建 `stylelint.config.js`文件
 
 ```
 module.exports = {
-  extends: [
-    'stylelint-config-standard', // 配置stylelint拓展插件
-    'stylelint-config-html/vue', // 配置 vue 中 template 样式格式化
-    'stylelint-config-standard-scss', // 配置stylelint scss插件
-    'stylelint-config-recommended-vue/scss', // 配置 vue 中 scss 样式格式化
-    'stylelint-config-recess-order' // 配置stylelint css属性书写顺序插件,
-  ],
-  overrides: [
-    {
-      files: ['**/*.(scss|css|vue|html)'],
-      customSyntax: 'postcss-scss',
-    },
-    {
-      files: ['**/*.(html|vue)'],
-      customSyntax: 'postcss-html',
-    },
-  ],
-  ignoreFiles: [
-    '**/*.js',
-    '**/*.jsx',
-    '**/*.tsx',
-    '**/*.ts',
-    '**/*.json',
-    '**/*.md',
-    '**/*.yaml',
-  ],
-  /**
-   * null  => 关闭该规则
-   * always => 必须
-   */
-  rules: {
-    'value-keyword-case': null, // 在 css 中使用 v-bind，不报错
-    'no-descending-specificity': null, // 禁止在具有较高优先级的选择器后出现被其覆盖的较低优先级的选择器
-    'function-url-quotes': 'always', // 要求或禁止 URL 的引号 "always(必须加上引号)"|"never(没有引号)"
-    'no-empty-source': null, // 关闭禁止空源码
-    'selector-class-pattern': null, // 关闭强制选择器类名的格式
-    'property-no-unknown': null, // 禁止未知的属性(true 为不允许)
-    'block-opening-brace-space-before': 'always', //大括号之前必须有一个空格或不能有空白符
-    'value-no-vendor-prefix': null, // 关闭 属性值前缀 --webkit-box
-    'property-no-vendor-prefix': null, // 关闭 属性前缀 -webkit-mask
-    'selector-pseudo-class-no-unknown': [
-      // 不允许未知的选择器
-      true,
-      {
-        ignorePseudoClasses: ['global', 'v-deep', 'deep'], // 忽略属性，修改element默认样式的时候能使用到
-      },
-    ],
-  },
+	root: true,
+	extends: [
+		'stylelint-config-standard', // 配置stylelint拓展插件
+		'stylelint-config-html/vue', // 配置 vue 中 template 样式格式化
+		'stylelint-config-recess-order' // 配置stylelint css属性书写顺序插件
+	],
+	plugins: ['stylelint-order', 'stylelint-prettier', 'stylelint-scss'],
+	overrides: [
+		{
+			files: ['**/*.(css|html|vue)'],
+			customSyntax: 'postcss-html'
+		},
+		{
+			files: ['*.scss', '**/*.scss'],
+			customSyntax: 'postcss-scss',
+			extends: ['stylelint-config-standard-scss', 'stylelint-config-recommended-vue/scss']
+		}
+	],
+	rules: {
+		'selector-class-pattern': null, // 关闭强制选择器类名的格式
+		'no-descending-specificity': null, // 禁止在具有较高优先级的选择器后出现被其覆盖的较低优先级的选择器
+		'scss/dollar-variable-pattern': null, // 允许 SCSS 变量的命名采用任何模式，不做强制规定。
+		'selector-pseudo-class-no-unknown': [
+			// 不允许未知的选择器
+			true,
+			{
+				ignorePseudoClasses: ['deep', 'global']
+			}
+		],
+		'selector-pseudo-element-no-unknown': [
+			true,
+			{
+				ignorePseudoElements: ['v-deep', 'v-global', 'v-slotted']
+			}
+		],
+		'at-rule-no-unknown': [
+			true,
+			{
+				ignoreAtRules: [
+					'tailwind',
+					'apply',
+					'variants',
+					'responsive',
+					'screen',
+					'function',
+					'if',
+					'each',
+					'include',
+					'mixin',
+					'use'
+				]
+			}
+		],
+		'rule-empty-line-before': [
+			'always',
+			{
+				ignore: ['after-comment', 'first-nested']
+			}
+		],
+		'unit-no-unknown': [true, { ignoreUnits: ['rpx'] }],
+		'order/order': [
+			[
+				'dollar-variables',
+				'custom-properties',
+				'at-rules',
+				'declarations',
+				{
+					type: 'at-rule',
+					name: 'supports'
+				},
+				{
+					type: 'at-rule',
+					name: 'media'
+				},
+				'rules'
+			],
+			{ severity: 'warning' }
+		]
+	},
+	ignoreFiles: ['**/*.js', '**/*.ts', '**/*.jsx', '**/*.tsx']
 }
 
 ```
@@ -422,7 +454,58 @@ pnpm install vue-router
 
 ### 3.modules
 
+在 modules 文件夹下创建模块化的 ts 文件，并填入对应的代码，模板如下：
+
+ `modules/example.ts`
+
+```
+export default [
+  {
+	path: '/example',
+	name: 'example',
+	component: () => import('@/views/example/index.vue'),
+	meta: {
+      title: '举例'
+	}
+  }
+];
+```
+
 ### 4.index.ts
+
+```
+import type { App } from 'vue';
+import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
+// 引入 example.ts
+import exampleRouter from './modules/example';
+
+
+
+export const publicRoutes: Array<RouteRecordRaw> = [...exampleRouter];
+
+const router = createRouter({
+	history: createWebHashHistory(),
+	routes: publicRoutes
+});
+
+/* 初始化路由表 */
+export function resetRouter() {
+	router.getRoutes().forEach((route) => {
+		const { name } = route;
+		if (name) {
+			router.hasRoute(name) && router.removeRoute(name);
+		}
+	});
+}
+
+/* 导出 setupRouter */
+export const setupRouter = (app: App<Element>) => {
+	app.use(router);
+};
+
+/* 导出 router */
+export default router
+```
 
 ### 5.main.ts
 
@@ -431,7 +514,7 @@ import { createApp } from 'vue';
 import App from './App.vue';
 
 const app = createApp(App);
-// 引入我们导出的 router 
+// 引入导出的 router 
 import { setupRouter } from '@/router';
 
 const setupApp = async () => {
@@ -459,24 +542,208 @@ setupApp();
 
 
 
+## 五、css原子化
+
+Tailwind官网[Tailwind CSS ](https://tailwindcss.com/)
+
+### 1.安装
+
+```
+pnpm install -D tailwindcss postcss autoprefixer
+```
+
+### 2.初始化
+
+```
+npx tailwindcss init -p
+```
+
+修改`postcss.config.js` 文件
+
+```
+module.exports = {
+	plugins: {
+		tailwindcss: {},
+		autoprefixer: {}
+	}
+}
+```
+
+修改`tailwind.config.js`文件
+
+```
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  darkMode: "class",
+  corePlugins: {
+    preflight: false
+  },
+  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
+  theme: {
+    extend: {
+      colors: {
+        bg_color: "var(--el-bg-color)",
+        primary: "var(--el-color-primary)",
+        primary_light_9: "var(--el-color-primary-light-9)",
+        text_color_primary: "var(--el-text-color-primary)",
+        text_color_regular: "var(--el-text-color-regular)",
+        text_color_disabled: "var(--el-text-color-disabled)"
+      }
+    }
+  }
+};
+```
+
+### 3.创建样式
+
+建立`.style/tailwind.css`
+
+```
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+### 4.防止慢更新
+
+在`main.ts`文件种导入`tailwind.css`
+
+> [!NOTE]
+>
+> 一定要在main.ts中导入tailwind.css，防止[vite](https://so.csdn.net/so/search?q=vite&spm=1001.2101.3001.7020)每次hmr都会请求src/style/index.scss整体css文件导致热更新慢的问题
+
+```
+import "./style/tailwind.css";
+```
+
+
+
+## 六、封装SVG组件
+
+> [!NOTE]
+>
+> 可以用，但是iconiFy更好用，但是有点学习成本，可以看看这个项目[iconify-offline-arrange](https://github.com/xiaoxian521/iconify-offline-arrange)，或者访问官网[Iconify](https://icon-sets.iconify.design/)
+
+### 1.安装
+
+```
+// 1、先执行这条命令
+pnpm i fast-glob -D
+// 2、再执行这条命令
+pnpm i vite-plugin-svg-icons -D
+```
+
+### 2.组件SVG组件
+
+建立`components/svgIcon/index.vue`文件
+
+```
+<script setup lang="ts">
+import { computed } from "vue";
+ 
+const props = defineProps({
+  iconClass: {
+    type: String,
+    required: true,
+  },
+  className: {
+    type: String,
+    default: "",
+  },
+  iconColor: {
+    type: String,
+    default: "CurrentColor",
+  },
+});
+const iconName = computed(() => `#icon-${props.iconClass}`);
+const svgClass = computed(() => {
+  if (props.className) {
+    return "svg-icon " + props.className;
+  } else {
+    return "svg-icon";
+  }
+});
+</script>
+<template>
+  <svg :class="svgClass" aria-hidden="true" :fill="iconColor">
+    <use :xlink:href="iconName" />
+  </svg>
+</template>
+ 
+<style scoped>
+.svg-icon {
+  // svg 图标默认宽高，根据情况自行调整
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  overflow: hidden;
+}
+</style>
+```
+
+### 3.main.ts
+
+```
+// svg 相关
+import 'virtual:svg-icons-register'
+import SvgIcon from './components/svgIcon/index.vue'
+
+app
+  .component('svg-icon', SvgIcon)
+```
+
+### 4.vite.config.ts
+
+```
+import { resolve } from 'path'
+// svg plugin
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
+export default defineConfig({
+  plugins: [
+    // 修改 svg 相关配置
+    createSvgIconsPlugin({
+      // 指定需要缓存的图标文件夹
+      iconDirs: [resolve(__dirname, './src/assets/svg')],
+    })],
+})
+
+
+```
+
+### 5.注意
+
+> [!NOTE]
+>
+> 若想修改 svg 的颜色，记得将 svg图片代码中的 fill属性删除删除
+
+
+
 ## 插件
 
 ###  1.Path Intellisense——VsCode 路径自动提示、路径自动补全插件
 
-![](E:\项目\开发手册\heiyanquan-handbook\docs\vue\static\path.png)
+![](.\static\path.png)
 
 ### 2.ESlint
 
-![](E:\项目\开发手册\heiyanquan-handbook\docs\vue\static\ES.png)
+![](.\static\ES.png)
 
-### 3.Prettier
+### 3.Prettier - Code formatter
 
-![](E:\项目\开发手册\heiyanquan-handbook\docs\vue\static\prettier.png)
+![](.\static\prettier.png)
 
 ### 4.Stylelint
 
-![](E:\项目\开发手册\heiyanquan-handbook\docs\vue\static\stylelint.png)
+![](.\static\stylelint.png)
 
 ### 5.EditorConfig for VS Code
 
 ![](..\vue\static\editor.png)
+
+### 6.Tailwind CSS IntelliSense
+
+![tailwind](.\static\tailwind.png)
+
+### 7.PostCSS Language Support
+
+![](.\static\postcss.png)
