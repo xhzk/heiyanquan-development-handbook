@@ -4,7 +4,7 @@
 
 ## 1.目录
 
-1.页内目录
+页内目录
 
 `gitbook-plugin-page-treeview`用于在页面生成目录
 
@@ -43,3 +43,82 @@ return renderContent ? `<div class="treeview__container">${copyRight + renderCon
 }
 ```
 
+
+
+## 2.灵活警报
+
+`gitbook-plugin-flexible-alerts`
+
+```
+{
+  "plugins": [
+    "flexible-alerts"
+  ],
+  "pluginsConfig": {
+    "flexible-alerts": {
+      "note": {
+        "label": "Hinweis"
+      },
+      "tip": {
+        "label": "Tipp"
+      },
+      "warning": {
+        "label": "Warnung"
+      },
+      "danger": {
+        "label": "Achtung"
+      }
+    }
+  }
+}
+```
+
+样式如下
+
+这是NOTE
+
+> [!NOTE]
+>
+> 这是NOTE
+
+这是NOTE FLAT
+
+>[!NOTE|style:flat]
+>
+>这是NOTE|style:flat
+
+这是TIP
+
+> [!TIP]
+>
+> 这是TIP
+
+这是TIP FLAT
+
+> [!TIP|style:flat]
+>
+> 这是TIP|style:flat
+
+这是WARNING
+
+> [!WARNING]
+>
+> 这是WARNING
+
+这是WARNING FLAT
+
+> [!WARNING|style:flat]
+>
+> 这是WARNING|style:flat
+
+这是DANGER
+
+> [!DANGER]
+>
+> 这是DANGER
+
+这是DANGER FLAT
+
+> [!DANGER|style:flat]
+>
+> 这是DANGER
