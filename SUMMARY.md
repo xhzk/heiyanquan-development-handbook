@@ -25,6 +25,8 @@
     - [五、css原子化](docs/vue/development/tailwind.md)
     - [六、封装SVG组件](docs/vue/development/svg.md)
     - [插件](docs/vue/development/plugins.md)
+- [服务器](docs/cloud/index.md)
+  - [配置](docs/cloud/setting.md)
 
 ## 项目
 
